@@ -54,11 +54,12 @@ metadata:
   name: prometheus-service
   namespace: monitoring
 spec:
+  type: NodePort
   selector:
     app: prometheus
   ports:
-  - port: 9090
-    targetPort: 9090
+    - port: 9090
+      targetPort: 9090
 ---
 # Grafana Deployment
 apiVersion: apps/v1
