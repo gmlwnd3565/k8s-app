@@ -44,27 +44,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://charts.bitnami.com/bitnami
-    chart: mariadb
-    targetRevision: 11.5.4
-    helm:
-      values: |
-        architecture: replication
-        auth:
-          rootPassword: "ntels1234"
-          replicationPassword: "ntels1234"
-        primary:
-          persistence:
-            storageClass: local-path
-            size: 10Gi
-        secondary:
-          persistence:
-            storageClass: local-path
-            size: 10Gi
-        metrics:
-          enabled: true
-          serviceMonitor:
-            enabled: true
+    repoURL: https://github.com/gmlwnd3565/k8s-app
+    targetRevision: main
+    path: manifests/db
   destination:
     server: https://kubernetes.default.svc
     namespace: database
@@ -81,54 +63,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://charts.bitnami.com/bitnami
-    chart: kube-prometheus
-    targetRevision: 9.4.1
-    helm:
-      values: |
-        grafana:
-          enabled: true
-          adminUser: admin
-          adminPassword: "ntels1234"
-          persistence:
-            enabled: true
-            storageClassName: local-path
-            size: 5Gi
-          service:
-            type: NodePort
-            nodePort: 32000
-          datasources:
-            datasources.yaml:
-              apiVersion: 1
-              datasources:
-                - name: Prometheus
-                  type: prometheus
-                  access: proxy
-                  url: http://monitoring-kube-prometheus-prometheus:9090
-                  isDefault: true
-          dashboardsProvider:
-            enabled: true
-          dashboards:
-            default:
-              k8s-cluster:
-                gnetId: 3119
-                revision: 2
-                datasource: Prometheus
-              node-exporter:
-                gnetId: 1860
-                revision: 24
-                datasource: Prometheus
-
-        prometheus:
-          prometheusSpec:
-            storageSpec:
-              volumeClaimTemplate:
-                spec:
-                  storageClassName: local-path
-                  accessModes: ["ReadWriteOnce"]
-                  resources:
-                    requests:
-                      storage: 20Gi
+    repoURL: https://github.com/gmlwnd3565/k8s-app
+    targetRevision: main
+    path: manifests/monitoring
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
@@ -136,3 +73,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
+

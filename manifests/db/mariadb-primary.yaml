@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb-primary
+  namespace: database
+spec:
+  serviceName: mariadb-primary
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb-primary
+  template:
+    metadata:
+      labels:
+        app: mariadb-primary
+    spec:
+      containers:
+      - name: mariadb
+        image: bitnami/mariadb:latest
+        env:
+        - name: MARIADB_REPLICATION_MODE
+          value: master
+        - name: MARIADB_ROOT_PASSWORD
+          value: ntels1234
+        ports:
+        - containerPort: 3306
+
