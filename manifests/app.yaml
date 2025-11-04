@@ -30,7 +30,7 @@ spec:
     path: manifests/app
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: app
   syncPolicy:
     automated:
       prune: true
