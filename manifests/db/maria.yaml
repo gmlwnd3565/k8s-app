@@ -23,11 +23,11 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: ntels1234
           volumeMounts:
-            - name: mariadb-pvc
+            - name: data
               mountPath: /var/lib/mysql
   volumeClaimTemplates:
     - metadata:
-        name: mariadb-pvc
+        name: data
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: local-path
