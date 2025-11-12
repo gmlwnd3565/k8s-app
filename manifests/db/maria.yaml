@@ -27,7 +27,7 @@ spec:
               mountPath: /var/lib/mysql
   volumeClaimTemplates:
     - metadata:
-        name: data
+        name: mariadb-pvc
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: local-path
