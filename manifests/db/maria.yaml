@@ -5,7 +5,7 @@ metadata:
   namespace: database
 spec:
   serviceName: mariadb
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: mariadb
